@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <input type="submit" value="Lamp On" class="btn btn-default" id="btnSubmit" />
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $(function() {
+            $('#btnSubmit').click(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: "https://localhost:44348/api/switch/toggleswitch",
+                    success: function(data) {
+                        alert(data);
+                    },
+                    error: function() {
+                        alert("Error occured!!")
+                    }
+                });
+            });
+        });
+    });  
+    </script>
