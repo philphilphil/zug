@@ -19,6 +19,8 @@ namespace API
         public int Id { get; set; }
 
         public Type Type { get; set; }
+
+        public Pin CurrentState { get; set; }
     }
 
     //Fleischmann switches and theyr artno
@@ -29,5 +31,11 @@ namespace API
         CurvedRight = 9175,
         CurvedLeft = 9174,
         Multiple = 9999
+    }
+
+    public enum Pin
+    {
+        Pin1 = 1,
+        Pin2 = 2
     }
 }

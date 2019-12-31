@@ -23,7 +23,8 @@ namespace Frontend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddCors();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,7 +41,11 @@ namespace Frontend
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+
+            app.UseCors(
+              options => options.WithOrigins("http://localhost:63747").AllowAnyMethod().AllowAnyHeader()
+          );
+
             app.UseStaticFiles();
 
             app.UseRouting();

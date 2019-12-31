@@ -4,29 +4,105 @@
     ViewData["Title"] = "Home page";
 }
 
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-        <input type="submit" value="Lamp On" class="btn btn-default" id="btnSubmit" />
+<div class="text-center">
+    <!-- Save for Web Slices (Capture.PNG) -->
+    <div id="Table_01">
+        <div id="gleisplan-default-01">
+            <img src="images/gleisplan_default_01.jpg" width="176" height="40" alt="">
+        </div>
+        <div id="gleisplan-default-02">
+            <img src="images/gleisplan_default_02.jpg" width="158" height="40" alt="">
+        </div>
+        <div id="gleisplan-default-03">
+            <img src="images/gleisplan_default_03.jpg" width="200" height="40" alt="">
+        </div>
+        <div id="gleisplan-default-04">
+            <img src="images/gleisplan_default_04.jpg" width="287" height="40" alt="">
+        </div>
+        <div id="gleisplan-default-05">
+            <img src="images/gleisplan_default_05.jpg" width="362" height="40" alt="">
+        </div>
+        <div id="gleisplan-default-06">
+            <img src="images/gleisplan_default_06.png" width="96" height="40" alt="">
+        </div>
+        <div id="gleisplan-default-07">
+            <img src="images/gleisplan_default_07.jpg" width="176" height="335" alt="">
+        </div>
+        <div id="gleisplan-default-08">
+            <img src="images/gleisplan_default_08.jpg" width="158" height="335" alt="">
+        </div>
+        <div id="gleisplan-default-09">
+            <img src="images/gleisplan_default_09.jpg" width="200" height="335" alt="">
+        </div>
+        <div id="gleisplan-default-10">
+            <img src="images/gleisplan_default_10.jpg" width="287" height="335" alt="">
+        </div>
+        <div id="gleisplan-default-11">
+            <img src="images/gleisplan_default_11.jpg" width="362" height="335" alt="">
+        </div>
+        <div id="gleisplan-default-12">
+            <img src="images/gleisplan_default_12.jpg" width="96" height="335" alt="">
+        </div>
+        <div id="gleisplan-default-13">
+            <img src="images/gleisplan_default_switch1.jpg" width="176" height="174" alt="" id="1" class="switch"> @* Gleis 1/2 Id: 1*@
+        </div>
+        <div id="gleisplan-default-14">
+            <img src="images/gleisplan_default_14.jpg" width="158" height="174" alt="">
+        </div>
+        <div id="gleisplan-default-15">
+            <img src="images/gleisplan_default_15.jpg" width="200" height="174" alt="">
+        </div>
+        <div id="gleisplan-default-16">
+            <img src="images/gleisplan_default_16.jpg" width="287" height="174" alt="">
+        </div>
+        <div id="gleisplan-default-17">
+            <img src="images/gleisplan_default_17.jpg" width="362" height="174" alt="">
+        </div>
+        <div id="gleisplan-default-18">
+            <img src="images/gleisplan_default_18.jpg" width="96" height="174" alt="">
+        </div>
     </div>
+</div>
 
 <script type="text/javascript">
 
-    $(document).ready(function() {
-        $(function() {
-            $('#btnSubmit').click(function(event) {
-                event.preventDefault();
-                $.ajax({
-                    type: "GET",
-                    url: "https://localhost:44348/api/switch/toggleswitch",
-                    success: function(data) {
-                        alert(data);
-                    },
-                    error: function() {
-                        alert("Error occured!!")
+    $(document).ready(function () {
+
+        function sendSwitchToggleRequest(id) {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:63747/api/switch/toggleswitch?id=" + id,
+                success: function (data) {
+
+                    if (document.getElementById(id).src.includes("_default_")) {
+                        document.getElementById(id).src = "images/gleisplan_triggered_switch" + id + ".jpg";
                     }
-                });
+                    else {
+                        document.getElementById(id).src = "images/gleisplan_default_switch" + id + ".jpg";
+                    }
+
+                },
+                error: function () {
+                    alert("Error");
+                }
+            });
+        }
+
+        $(function () {
+            $('#btnSubmit').click(function (event) {
+
             });
         });
-    });  
-    </script>
+
+        $(".switch").on("click", function () {
+            id = $(this).attr("id");
+            console.log(id);
+            event.preventDefault();
+            sendSwitchToggleRequest(id);
+        });
+
+
+
+    });
+
+</script>

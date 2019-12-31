@@ -4,6 +4,7 @@ using System.Device.Gpio;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ControllerApi.Classes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,39 +22,59 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("ToggleSwitch")]
-        public string ToogleSwitch()
+        public string ToogleSwitch(int id)
         {
-            GpioController controller = new GpioController();
+            var s = GetSwitch(id);
 
-            // GPIO 17 which is physical pin 11
-            int ledPin1 = 17;
-            // Sets the pin to output mode so we can switch something on
-            controller.OpenPin(ledPin1, PinMode.Output);
+            var pinToToggle = 0;
+            if (s.CurrentState == Pin.Pin1)
+            {
+                pinToToggle = s.RPI_Pin2;
+                s.CurrentState = Pin.Pin2;
+            }
+            else
+            {
+                pinToToggle = s.RPI_Pin1;
+                s.CurrentState = Pin.Pin1;
+            }
 
-            // turn on the LED
-            controller.Write(ledPin1, PinValue.High);
+            Raspi.TogglePin(pinToToggle);
 
-            //wait 500ms and turn off (no need for power on the switch after the switching operation)
-            //Thread.Sleep(500);
-            //controller.Write(ledPin1, PinValue.Low);
-
-            return _setup.Switches[0].Name;
+            return s.Name;
 
         }
 
         [HttpGet]
-        public string SetSwitch()
+        public string SetSwitch(int id, bool high)
         {
-            GpioController controller = new GpioController();
-            // GPIO 17 which is physical pin 11
-            int ledPin1 = 17;
-            // Sets the pin to output mode so we can switch something on
-            controller.OpenPin(ledPin1, PinMode.Output);
+            var s = GetSwitch(id);
 
-            // turn on the LED
-            controller.Write(ledPin1, PinValue.Low);
+            var value = PinValue.Low;
+            if (high) value = PinValue.High;
 
-            return _setup.Switches[0].Name;
+            Raspi.SetPin(id, value);
+
+            return s.Name;
+        }
+
+        [HttpGet]
+        public string SetAllSwitchesToDefault()
+        {
+            foreach (var s in _setup.Switches)
+            {
+                Raspi.TogglePin(s.RPI_Pin1);
+                s.CurrentState = Pin.Pin1;
+            }
+
+            return "success";
+        }
+
+        private Switch GetSwitch(int id)
+        {
+            var s = _setup.Switches.Where(x => x.Id == id).ToList();
+            if (s.Count != 1) throw new Exception("None or multiple switches with id " + id + " found.");
+
+            return s[0];
         }
     }
 }
