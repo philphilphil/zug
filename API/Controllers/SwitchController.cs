@@ -26,6 +26,9 @@ namespace API.Controllers
         {
             var s = GetSwitch(id);
 
+            //debug - skip RPI part
+            return "true";
+
             var pinToToggle = 0;
             if (s.CurrentState == Pin.Pin1)
             {

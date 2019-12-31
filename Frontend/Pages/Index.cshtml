@@ -5,104 +5,82 @@
 }
 
 <div class="text-center">
-    <!-- Save for Web Slices (Capture.PNG) -->
+
     <div id="Table_01">
-        <div id="gleisplan-default-01">
-            <img src="images/gleisplan_default_01.jpg" width="176" height="40" alt="">
+        <div id="switches-d-01">
+            <img src="images/switches_d_01.jpg" width="1279" height="40" alt="">
         </div>
-        <div id="gleisplan-default-02">
-            <img src="images/gleisplan_default_02.jpg" width="158" height="40" alt="">
+        <div id="switches-d-02">
+            <img src="images/switches_d_02.jpg" width="534" height="335" alt="">
         </div>
-        <div id="gleisplan-default-03">
-            <img src="images/gleisplan_default_03.jpg" width="200" height="40" alt="">
+        <div id="switches-d-03">
+            <img src="images/switches_d_3.jpg" width="157" height="335" alt="" class="switch" id="3">
         </div>
-        <div id="gleisplan-default-04">
-            <img src="images/gleisplan_default_04.jpg" width="287" height="40" alt="">
+        <div id="switches-d-04">
+            <img src="images/switches_d_4.jpg" width="130" height="335" alt="" class="switch" id="4">
         </div>
-        <div id="gleisplan-default-05">
-            <img src="images/gleisplan_default_05.jpg" width="362" height="40" alt="">
+        <div id="switches-d-05">
+            <img src="images/switches_d_05.jpg" width="362" height="509" alt="">
         </div>
-        <div id="gleisplan-default-06">
-            <img src="images/gleisplan_default_06.png" width="96" height="40" alt="">
+        <div id="switches-d-06">
+            <img src="images/switches_d_6.jpg" width="96" height="335" alt="" class="switch" id="6">
         </div>
-        <div id="gleisplan-default-07">
-            <img src="images/gleisplan_default_07.jpg" width="176" height="335" alt="">
+        <div id="switches-d-07">
+            <img src="images/switches_d_1.jpg" width="176" height="174" alt="" class="switch" id="1">
         </div>
-        <div id="gleisplan-default-08">
-            <img src="images/gleisplan_default_08.jpg" width="158" height="335" alt="">
+        <div id="switches-d-08">
+            <img src="images/switches_d_2.jpg" width="158" height="174" alt="" class="switch" id="2">
         </div>
-        <div id="gleisplan-default-09">
-            <img src="images/gleisplan_default_09.jpg" width="200" height="335" alt="">
+        <div id="switches-d-09">
+            <img src="images/switches_d_09.jpg" width="200" height="174" alt="">
         </div>
-        <div id="gleisplan-default-10">
-            <img src="images/gleisplan_default_10.jpg" width="287" height="335" alt="">
+        <div id="switches-d-10">
+            <img src="images/switches_d_5.jpg" width="287" height="174" alt="" class="switch" id="5">
         </div>
-        <div id="gleisplan-default-11">
-            <img src="images/gleisplan_default_11.jpg" width="362" height="335" alt="">
-        </div>
-        <div id="gleisplan-default-12">
-            <img src="images/gleisplan_default_12.jpg" width="96" height="335" alt="">
-        </div>
-        <div id="gleisplan-default-13">
-            <img src="images/gleisplan_default_switch1.jpg" width="176" height="174" alt="" id="1" class="switch"> @* Gleis 1/2 Id: 1*@
-        </div>
-        <div id="gleisplan-default-14">
-            <img src="images/gleisplan_default_14.jpg" width="158" height="174" alt="">
-        </div>
-        <div id="gleisplan-default-15">
-            <img src="images/gleisplan_default_15.jpg" width="200" height="174" alt="">
-        </div>
-        <div id="gleisplan-default-16">
-            <img src="images/gleisplan_default_16.jpg" width="287" height="174" alt="">
-        </div>
-        <div id="gleisplan-default-17">
-            <img src="images/gleisplan_default_17.jpg" width="362" height="174" alt="">
-        </div>
-        <div id="gleisplan-default-18">
-            <img src="images/gleisplan_default_18.jpg" width="96" height="174" alt="">
+        <div id="switches-d-11">
+            <img src="images/switches_d_11.jpg" width="96" height="174" alt="">
         </div>
     </div>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            function sendSwitchToggleRequest(id) {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:63747/api/switch/toggleswitch?id=" + id,
+                    success: function (data) {
+
+                        if (document.getElementById(id).src.includes("_d_")) {
+                            document.getElementById(id).src = "images/switches_t_" + id + ".jpg";
+                        }
+                        else {
+                            document.getElementById(id).src = "images/switches_d_" + id + ".jpg";
+                        }
+
+                    },
+                    error: function () {
+                        alert("Error");
+                    }
+                });
+            }
+
+            $(function () {
+                $('#btnSubmit').click(function (event) {
+
+                });
+            });
+
+            $(".switch").on("click", function () {
+                id = $(this).attr("id");
+                console.log(id);
+                event.preventDefault();
+                sendSwitchToggleRequest(id);
+            });
+
+
+
+        });
+
+    </script>
 </div>
-
-<script type="text/javascript">
-
-    $(document).ready(function () {
-
-        function sendSwitchToggleRequest(id) {
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:63747/api/switch/toggleswitch?id=" + id,
-                success: function (data) {
-
-                    if (document.getElementById(id).src.includes("_default_")) {
-                        document.getElementById(id).src = "images/gleisplan_triggered_switch" + id + ".jpg";
-                    }
-                    else {
-                        document.getElementById(id).src = "images/gleisplan_default_switch" + id + ".jpg";
-                    }
-
-                },
-                error: function () {
-                    alert("Error");
-                }
-            });
-        }
-
-        $(function () {
-            $('#btnSubmit').click(function (event) {
-
-            });
-        });
-
-        $(".switch").on("click", function () {
-            id = $(this).attr("id");
-            console.log(id);
-            event.preventDefault();
-            sendSwitchToggleRequest(id);
-        });
-
-
-
-    });
-
-</script>
