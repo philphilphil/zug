@@ -47,6 +47,11 @@ namespace API
             {
                 endpoints.MapControllers();
             });
+
+            app.UseDefaultFiles(new DefaultFilesOptions
+            {
+                DefaultFileNames = new List<string> { "index.html" }
+            });
         }
     }
 }
