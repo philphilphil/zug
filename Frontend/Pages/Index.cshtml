@@ -48,7 +48,7 @@
             function sendSwitchToggleRequest(id) {
                 $.ajax({
                     type: "GET",
-                    url: "http://localhost:63747/api/switch/toggleswitch?id=" + id,
+                    url: "http://localhost:5002/api/switch/toggleswitch?id=" + id,
                     success: function (data) {
 
                         if (document.getElementById(id).src.includes("_d_")) {

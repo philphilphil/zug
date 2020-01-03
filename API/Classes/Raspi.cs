@@ -11,17 +11,18 @@ namespace ControllerApi.Classes
     {
         public static void TogglePin(int pinId)
         {
+
             GpioController controller = new GpioController();
 
             // Sets the pin to output mode
             controller.OpenPin(pinId, PinMode.Output);
 
-            //set pin to value
-            controller.Write(pinId, PinValue.High);
-
-            //wait 500ms and turn off (no need for power on the switch after the switching operation) and 
-            Thread.Sleep(500);
+            //set pin to value, relay triggers on low!
             controller.Write(pinId, PinValue.Low);
+
+            //wait 100ms and turn RELAY off (which is pin high)
+            Thread.Sleep(100);
+            controller.Write(pinId, PinValue.High);
 
             //close pin again
             controller.ClosePin(pinId);

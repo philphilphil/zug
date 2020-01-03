@@ -24,12 +24,15 @@ namespace API.Controllers
         [Route("ToggleSwitch")]
         public string ToogleSwitch(int id)
         {
+            string debug = "";
             var s = GetSwitch(id);
 
             //debug - skip RPI part
-            return "true";
-
+            //return "true";
+            debug += "State" + s.CurrentState.ToString() + " ";
             var pinToToggle = 0;
+            debug += pinToToggle.ToString();
+
             if (s.CurrentState == Pin.Pin1)
             {
                 pinToToggle = s.RPI_Pin2;
@@ -40,10 +43,10 @@ namespace API.Controllers
                 pinToToggle = s.RPI_Pin1;
                 s.CurrentState = Pin.Pin1;
             }
-
+            debug += pinToToggle.ToString() + " ";
             Raspi.TogglePin(pinToToggle);
-
-            return s.Name;
+            debug += "State" + s.CurrentState.ToString() + " ";
+            return debug;
 
         }
 
@@ -61,6 +64,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Route("SetAllSwitchesToDefault")]
         public string SetAllSwitchesToDefault()
         {
             foreach (var s in _setup.Switches)
