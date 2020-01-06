@@ -1,5 +1,5 @@
 #!flask/bin/python
-from flask import Flask
+from flask import *
 import RPi.GPIO as GPIO
 import time
 import numpy as np
@@ -9,7 +9,11 @@ from collections import namedtuple
 app = Flask(__name__)
 switches = []
 servos = []
-
+### Frontend
+@app.route('/control')
+def control():
+    return send_file("static/Index.html")
+    
 ### Switches API
 @app.route('/Switch/AllToDefault', methods=['GET'])
 def switch_all_to_default():
