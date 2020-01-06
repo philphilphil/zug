@@ -15,6 +15,7 @@ servos = []
 def switch_all_to_default():
     for s in switches:
         toggle_rpi_pin(s.rpiPin1)
+        set_rpi_pin_high(s.rpiPin2)
         s.state= 'straight'
     return "done"
  
@@ -40,12 +41,19 @@ def switch_toggle(id):
     return s.state
 
 ### Servo API
+@app.route('/Servo/Toggle/<int:id>', methods=['GET'])
+def servo_toggle(id):
+    global servos
+    s = get_servo(id)
+    move_servo(s)
+
+    return s.state
+
 @app.route('/Servo/AllToDefault', methods=['GET'])
 def servo_all_to_default():
     for s in servos:
         s.state = 'open'
         move_servo(s)
-        s.state= 'closed'
     return "done"
 
 ### Setup
@@ -54,30 +62,44 @@ def base_setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
-    switches.append(Switch('Gleis 1/2', 1, 18, 23, 'straight')) #diverging 
-    #switches.append(Switch('Werkstatt / Gleis 2', 1, 18, 23, 'straight')) #diverging 
-    #switches.append(Switch('Schleife / Werkstatt', 3, 18, 23, 'straight')) #diverging 
-    #switches.append(Switch('Werkstatt 1/2', '4', 18, 23, 'straight')) #diverging 
-    #switches.append(Switch('Gleis 2 / 3', 5, 18, 23, 'straight')) #diverging 
-    #switches.append(Switch('Schleife / Gleis 1/2', 6, 18, 23, 'straight')) #diverging 
-    #s = Switch('Gleis 1/2', 1, 18, 23, 'straight')
-    #print(s)
+    switches.append(Switch('Gleis 1/2', 1, 3, 4, 'straight')) #diverging 
+    switches.append(Switch('Werkstatt / Gleis 2', 2, 17, 27, 'straight')) #diverging 
+    switches.append(Switch('Schleife / Werkstatt', 3, 22, 10, 'straight')) #diverging 
+    switches.append(Switch('Werkstatt 1/2', 4, 9, 11, 'straight')) #diverging 
+    switches.append(Switch('Gleis 2 / 3', 5, 24, 25, 'straight')) #diverging 
+    switches.append(Switch('Schleife / Gleis 1/2', 6, 8, 7, 'straight')) #diverging 
 
-    servos.append(Servo('Lokschuppen', 1, 2, np.linspace(12.5,8.5,80), np.linspace(8.5,12.5,80), 'closed'))
+    servos.append(Servo('Lokschuppen', 1, 2, np.linspace(12.5,8.5,200), np.linspace(8.5,12.5,200), 'closed'))
+    
+    #currently not used RPI Pins
+    set_rpi_pin_high(12)
+    set_rpi_pin_high(16)
+    set_rpi_pin_high(20)
+    set_rpi_pin_high(21)
 
 ### Helper Methods
 def get_switch(id):
     for s in switches:
         #print(s)
         if s.id == id:
-            return s
-    
+            return s   
+    return
+
+def get_servo(id):
+    for s in servos:
+        #print(s)
+        if s.id == id:
+            return s   
     return
 
 def toggle_rpi_pin(id):
     GPIO.setup(id, GPIO.OUT)
     GPIO.output(id, GPIO.LOW)
     time.sleep(0.1)
+    GPIO.output(id, GPIO.HIGH)
+    
+def set_rpi_pin_high(id):
+    GPIO.setup(id, GPIO.OUT)
     GPIO.output(id, GPIO.HIGH)
 
 def move_servo(s):
@@ -100,5 +122,3 @@ if __name__ == '__main__':
     switch_all_to_default()
     servo_all_to_default()
     app.run(debug=True, host= '0.0.0.0')
-
-    
