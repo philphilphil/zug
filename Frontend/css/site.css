@@ -1,95 +1,127 @@
 ﻿#Table_01 {
-    position: absolute;
-    left: 0px;
-    top: 70px;
-    width: 1279px;
-    height: 549px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:1024px;
+	height:458px;
 }
 
 #switches-d-01 {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 1279px;
-    height: 40px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:1024px;
+	height:59px;
 }
 
 #switches-d-02 {
-    position: absolute;
-    left: 0px;
-    top: 40px;
-    width: 534px;
-    height: 335px;
+	position:absolute;
+	left:0px;
+	top:59px;
+	width:930px;
+	height:64px;
 }
 
 #switches-d-03 {
-    position: absolute;
-    left: 534px;
-    top: 40px;
-    width: 157px;
-    height: 335px;
+	position:absolute;
+	left:930px;
+	top:59px;
+	width:94px;
+	height:268px;
 }
 
 #switches-d-04 {
-    position: absolute;
-    left: 691px;
-    top: 40px;
-    width: 130px;
-    height: 335px;
+	position:absolute;
+	left:0px;
+	top:123px;
+	width:337px;
+	height:192px;
 }
 
 #switches-d-05 {
-    position: absolute;
-    left: 821px;
-    top: 40px;
-    width: 362px;
-    height: 509px;
+	position:absolute;
+	left:337px;
+	top:123px;
+	width:145px;
+	height:192px;
 }
 
 #switches-d-06 {
-    position: absolute;
-    left: 1183px;
-    top: 40px;
-    width: 96px;
-    height: 335px;
+	position:absolute;
+	left:482px;
+	top:123px;
+	width:140px;
+	height:192px;
 }
 
 #switches-d-07 {
-    position: absolute;
-    left: 0px;
-    top: 375px;
-    width: 176px;
-    height: 174px;
+	position:absolute;
+	left:622px;
+	top:123px;
+	width:308px;
+	height:260px;
 }
 
 #switches-d-08 {
-    position: absolute;
-    left: 176px;
-    top: 375px;
-    width: 158px;
-    height: 174px;
+	position:absolute;
+	left:0px;
+	top:315px;
+	width:123px;
+	height:81px;
 }
 
 #switches-d-09 {
-    position: absolute;
-    left: 334px;
-    top: 375px;
-    width: 200px;
-    height: 174px;
+	position:absolute;
+	left:123px;
+	top:315px;
+	width:139px;
+	height:81px;
 }
 
 #switches-d-10 {
-    position: absolute;
-    left: 534px;
-    top: 375px;
-    width: 287px;
-    height: 174px;
+	position:absolute;
+	left:262px;
+	top:315px;
+	width:360px;
+	height:68px;
 }
 
 #switches-d-11 {
-    position: absolute;
-    left: 1183px;
-    top: 375px;
-    width: 96px;
-    height: 174px;
+	position:absolute;
+	left:930px;
+	top:327px;
+	width:94px;
+	height:131px;
+}
+
+#switches-d-12 {
+	position:absolute;
+	left:262px;
+	top:383px;
+	width:153px;
+	height:75px;
+}
+
+#switches-d-13 {
+	position:absolute;
+	left:415px;
+	top:383px;
+	width:233px;
+	height:75px;
+}
+
+#switches-d-14 {
+	position:absolute;
+	left:648px;
+	top:383px;
+	width:282px;
+	height:75px;
+}
+
+#switches-d-15 {
+	position:absolute;
+	left:0px;
+	top:396px;
+	width:262px;
+	height:62px;
 }

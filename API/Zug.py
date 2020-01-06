@@ -9,6 +9,8 @@ from collections import namedtuple
 app = Flask(__name__)
 switches = []
 servos = []
+leds = []
+
 ### Frontend
 @app.route('/control')
 def control():
@@ -18,8 +20,8 @@ def control():
 @app.route('/Switch/AllToDefault', methods=['GET'])
 def switch_all_to_default():
     for s in switches:
-        toggle_rpi_pin(s.rpiPin1)
-        set_rpi_pin_high(s.rpiPin2)
+        toggle_rpi_pin(s.rpiPinStraight)
+        set_rpi_pin_high(s.rpiPinDiverging)
         s.state= 'straight'
     return "done"
  
@@ -33,10 +35,10 @@ def switch_toggle(id):
     
     outputPin = 0
     if s.state == 'straight':
-        outputPin = s.rpiPin2
+        outputPin = s.rpiPinDiverging
         s.state= 'diverging'
     else:
-        outputPin = s.rpiPin1
+        outputPin = s.rpiPinStraight
         s.state= 'straight'
     
     #print("Pin:" , outputPin, s)

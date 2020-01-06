@@ -8,10 +8,10 @@ $(document).ready(function () {
             success: function (data) {
 
                 if (document.getElementById(id).src.includes("_d_")) {
-                    document.getElementById(id).src = "static/images/switches_t_" + id + ".jpg";
+                    document.getElementById(id).src = document.getElementById(id).src.replace("_d_", "_t_");
                 }
                 else {
-                    document.getElementById(id).src = "static/images/switches_d_" + id + ".jpg";
+                    document.getElementById(id).src = document.getElementById(id).src.replace("_t_", "_d_");
                 }
 
             },
