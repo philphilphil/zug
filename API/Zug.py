@@ -68,12 +68,12 @@ def base_setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
-    switches.append(Switch('Gleis 1/2', 1, 3, 4, 'straight')) #diverging 
-    switches.append(Switch('Werkstatt / Gleis 2', 2, 17, 27, 'straight')) #diverging 
-    switches.append(Switch('Schleife / Werkstatt', 3, 22, 10, 'straight')) #diverging 
-    switches.append(Switch('Werkstatt 1/2', 4, 9, 11, 'straight')) #diverging 
-    switches.append(Switch('Gleis 2 / 3', 5, 24, 25, 'straight')) #diverging 
-    switches.append(Switch('Schleife / Gleis 1/2', 6, 8, 7, 'straight')) #diverging 
+    switches.append(Switch('Gleis 1/2', 1, 4, 3, 'straight'))  
+    switches.append(Switch('Werkstatt / Gleis 2', 2, 27, 17, 'straight'))  
+    switches.append(Switch('Schleife / Werkstatt', 3, 10, 22, 'straight'))  
+    switches.append(Switch('Werkstatt 1/2', 4, 9, 11, 'straight'))  
+    switches.append(Switch('Gleis 2 / 3', 5, 25, 24, 'straight'))  
+    switches.append(Switch('Schleife / Gleis 1/2', 6, 8, 7, 'straight'))  
 
     servos.append(Servo('Lokschuppen', 1, 2, np.linspace(12.5,8.5,200), np.linspace(8.5,12.5,200), 'closed'))
     
