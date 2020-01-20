@@ -1,5 +1,5 @@
 # zug
-software to control various things of a model train with a raspberry pi
+software to control various things of a model train with a raspberry pi.
 This is not usable by others since its tailored to my train build but maybe it helps someone.
 
 ## Hardware
